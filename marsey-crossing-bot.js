@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
+const { getAllPosts } = require("./rdrama-requests");
 
 module.exports = class MarseyCrossingBot {
   constructor() {
@@ -17,6 +18,8 @@ module.exports = class MarseyCrossingBot {
       "Available marsey length: ",
       (await getAvailableMarseys()).length
     );
+
+    console.log("Front page is: ", await getAllPosts());
   }
 
   /**
