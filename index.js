@@ -1,4 +1,8 @@
+const MarseyCrossingBot = require("./marsey-crossing-bot");
+
+// Load environment variables.
 require("dotenv").config();
 
-console.log("Access Token", process.env.RDRAMA_ACCESS_TOKEN);
-console.log("Client ID", process.env.RDRAMA_CLIENT_ID);
+// Each single usage of the bot accepts a single command, runs it, then exits.
+const bot = new MarseyCrossingBot();
+bot.run("test");
