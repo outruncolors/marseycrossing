@@ -12,6 +12,7 @@
 - In addition, there is a chance the Marsey will be "scared off," preventing anyone else from catching them in that particular thread.
 - If the Marsey sticks around, future hugs have a higher chance of being successful.
 - Occasionally, a single lost Marsey might wander up to (randomly reply to) a post. When this happens, the first user with a pre-existing village to reply `/claim` instantly wins over the Marsey.
+- In addition to welcoming posts made when a Marsey moves in, a daily post is made that chronicles the activities of the residents and their interactions.
 
 ## What's Next
 
