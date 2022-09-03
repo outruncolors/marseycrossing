@@ -1,6 +1,6 @@
 const fs = require("fs").promises;
 const path = require("path");
-const { getAllPosts } = require("./rdrama-requests");
+const { createNewPost } = require("./rdrama-requests");
 
 module.exports = class MarseyCrossingBot {
   constructor() {
@@ -9,17 +9,8 @@ module.exports = class MarseyCrossingBot {
   }
 
   async run(command) {
-    const database = await readDatabase();
-
-    console.log("Bot running command: ", command);
-    console.log("Database is: ", database);
-    console.log("All marsey length: ", (await readMarseys()).length);
-    console.log(
-      "Available marsey length: ",
-      (await getAvailableMarseys()).length
-    );
-
-    console.log("Front page is: ", await getAllPosts());
+    const result = await createNewPost("Sample A", "Body A");
+    console.log(result);
   }
 
   /**
