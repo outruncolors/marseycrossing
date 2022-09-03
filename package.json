@@ -1,0 +1,15 @@
+{
+  "name": "marseycrossing",
+  "version": "1.0.0",
+  "description": "Kinda like Animal Crossing but with Marsey",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index",
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.2"
+  }
+}
