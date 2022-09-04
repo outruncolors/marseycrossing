@@ -30,7 +30,7 @@ async function getAvailableMarseys() {
 
   for (const {
     village: { residents },
-  } of Object.values(database)) {
+  } of Object.values(database.players)) {
     for (const marsey of residents) {
       marseyLookup[marsey] = false;
     }
@@ -41,3 +41,9 @@ async function getAvailableMarseys() {
     .map(([key]) => key);
 }
 exports.getAvailableMarseys = getAvailableMarseys;
+
+async function getActiveCongregation() {
+  const database = await readDatabase();
+  return database.congregation;
+}
+exports.getActiveCongregation = getActiveCongregation;

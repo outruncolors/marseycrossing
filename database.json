@@ -1,8 +1,11 @@
 {
-  "14281": {
-    "village": {
-      "name": "Primera",
-      "residents": ["marseyvirus"]
+  "congregation": null,
+  "players": {
+    "14281": {
+      "village": {
+        "name": "Primera",
+        "residents": ["marseyvirus"]
+      }
     }
   }
 }

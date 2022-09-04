@@ -4,15 +4,14 @@
   "description": "Kinda like Animal Crossing but with Marsey",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index",
-    "start:dev": "NODE_ENV=development node ./index",
-    "test": "npm test"
+    "spawn-congregation": "node ./index --command=spawnCongregation"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
     "chance": "^1.1.8",
-    "dotenv": "^16.0.2"
+    "dotenv": "^16.0.2",
+    "minimist": "^1.2.6"
   }
 }
