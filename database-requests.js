@@ -1,6 +1,7 @@
 const fs = require("fs").promises;
 const path = require("path");
 
+// #region General
 async function readDatabase() {
   const pathname = path.join(__dirname, "./database.json");
   const database = await fs.readFile(pathname, {
@@ -11,6 +12,16 @@ async function readDatabase() {
 }
 exports.readDatabase = readDatabase;
 
+async function writeDatabase(database) {
+  const pathname = path.join(__dirname, "./database.json");
+
+  await fs.writeFile(pathname, JSON.stringify(database, null, 2), {
+    encoding: "utf-8",
+  });
+}
+// #endregion
+
+// #region Specific
 async function readMarseys() {
   const pathname = path.join(__dirname, "./marseys.json");
   const marseys = await fs.readFile(pathname, {
@@ -47,3 +58,15 @@ async function getActiveCongregation() {
   return database.congregation;
 }
 exports.getActiveCongregation = getActiveCongregation;
+
+async function createCongregation(congregation) {
+  const database = await readDatabase();
+
+  if (!database.congregation) {
+    database.congregation = congregation;
+  }
+
+  await writeDatabase(database);
+}
+exports.createCongregation = createCongregation;
+// #endregion

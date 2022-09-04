@@ -1,10 +1,63 @@
 {
-  "congregation": null,
+  "congregation": {
+    "marseys": {
+      "all": [
+        "marseyschizostimslove",
+        "marseyspit",
+        "marseyfellowkids",
+        "marseyduck",
+        "marppy",
+        "marseysaluteussr"
+      ],
+      "byName": {
+        "marseyschizostimslove": {
+          "name": "marseyschizostimslove",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        },
+        "marseyspit": {
+          "name": "marseyspit",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        },
+        "marseyfellowkids": {
+          "name": "marseyfellowkids",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        },
+        "marseyduck": {
+          "name": "marseyduck",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        },
+        "marppy": {
+          "name": "marppy",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        },
+        "marseysaluteussr": {
+          "name": "marseysaluteussr",
+          "hugs": 0,
+          "scared": 0,
+          "status": "active"
+        }
+      }
+    },
+    "interactions": {},
+    "postId": ""
+  },
   "players": {
     "14281": {
       "village": {
         "name": "Primera",
-        "residents": ["marseyvirus"]
+        "residents": [
+          "marseyvirus"
+        ]
       }
     }
   }

@@ -30,12 +30,23 @@ module.exports = class MarseyCrossingBot {
 
     const availableMarseys = await repository.getAvailableMarseys();
     const marseyCount = this.chance.integer({
-      min: process.env.MARSEY_CONGREGATION_SIZE_MINIMUM,
-      max: process.env.MARSEY_CONGREGATION_SIZE_MAXIMUM,
+      min: parseInt(process.env.MARSEY_CONGREGATION_SIZE_MINIMUM),
+      max: parseInt(process.env.MARSEY_CONGREGATION_SIZE_MAXIMUM),
     });
     const selectedMarseys = this.chance.pickset(availableMarseys, marseyCount);
+    const congregationData = {
+      marseys: initializeMarseyCongregation(selectedMarseys),
+      interactions: {},
+      postId: "",
+    };
 
-    console.info("-- Creating a congregation with: ", selectedMarseys);
+    // Make the post, retrieve the ID, etc.
+
+    await repository.createCongregation(congregationData);
+
+    console.info(
+      `Successfully created a new congregation containing ${marseyCount} Marseys.`
+    );
   }
 
   /**
@@ -43,3 +54,29 @@ module.exports = class MarseyCrossingBot {
    */
   handleUserHugged() {}
 };
+
+// #region Helpers
+function initializeActiveMarsey(name) {
+  return {
+    name,
+    hugs: 0,
+    scared: 0,
+    status: "active", // active | ran | caught
+  };
+}
+
+function initializeMarseyCongregation(marseys) {
+  const normalized = marseys.reduce(
+    (prev, next) => {
+      prev.byName[next] = initializeActiveMarsey(next);
+      return prev;
+    },
+    {
+      all: marseys,
+      byName: {},
+    }
+  );
+
+  return normalized;
+}
+// #endregion
