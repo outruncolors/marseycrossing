@@ -92,7 +92,7 @@ exports.updatePost = updatePost;
  */
 async function deletePost(id) {
   try {
-    const result = await instance.delete(`/delete_post/${id}`);
+    const result = await instance.post(`/delete_post/${id}`);
     return result.data;
   } catch (error) {
     console.error("Unable to delete post.", error);

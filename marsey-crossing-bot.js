@@ -41,11 +41,16 @@ module.exports = class MarseyCrossingBot {
     };
 
     // Make the post, retrieve the ID, etc.
+    const title = `${marseyCount} Marseys have congregated nearby!`;
+    const body = buildCongregationTableMarkdown(congregationData.marseys);
+    const post = await requests.createPost(title, body);
+    congregationData.postId = post.id;
 
     await repository.createCongregation(congregationData);
 
     console.info(
-      `Successfully created a new congregation containing ${marseyCount} Marseys.`
+      `Successfully created a new congregation containing ${marseyCount} Marseys.`,
+      `${process.env.RDRAMA_BASE_URL}/h/marseycrossing/post/${post.id}`
     );
   }
 
@@ -60,8 +65,7 @@ module.exports = class MarseyCrossingBot {
       throw new Error("There is no active congregation.");
     }
 
-    // Lock the post.
-
+    await requests.deletePost(activeCongregation.postId);
     await repository.deleteCongregation();
 
     console.info("Successfully dispersed the active congregation.");
@@ -96,5 +100,51 @@ function initializeMarseyCongregation(marseys) {
   );
 
   return normalized;
+}
+
+function buildMarseyScaredText(scaredLevel) {
+  if (scaredLevel === 0) {
+    return "😀";
+  }
+
+  if (scaredLevel > 0 && scaredLevel < 3) {
+    return "🤭";
+  }
+
+  if (scaredLevel > 3 && scaredLevel < 6) {
+    return "😬";
+  }
+
+  if (scaredLevel > 6 && scaredLevel < 9) {
+    return "😨";
+  }
+
+  return "😱";
+}
+
+function buildCongregationTableMarkdown(normalizedMarseys) {
+  return `<table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Hugs</th>
+          <th>Scared?</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${normalizedMarseys.all.map((marsey) => {
+          const data = normalizedMarseys.byName[marsey];
+
+          return `<tr>
+            <td>:#${marsey}:</td>
+            <td>${data.hugs}</td>
+            <td>${buildMarseyScaredText(data.scared)}</td>
+            <td>${data.status}</td>
+          </tr>`;
+        })}
+      </tbody>
+    </table>
+  `.replace(/\s+/g, "");
 }
 // #endregion
