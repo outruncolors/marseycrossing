@@ -101,3 +101,81 @@ async function deletePost(id) {
 }
 exports.deletePost = deletePost;
 // #endregion
+
+// #region Comments
+/**
+ *
+ * @param {string} title - The title of the comment.
+ * @param {string} body - The content of the comment.
+ * @returns
+ */
+async function createComment(submission, parentFullName, body) {
+  try {
+    const result = await instance.post("/comment", {
+      formkey: "470acae33bdbdb398a03f3b93bae3af1",
+      sub: "marseycrossing",
+      submission,
+      parent_fullname: parentFullName,
+      body,
+    });
+    return result.data;
+  } catch (error) {
+    console.error("Unable to create comment.", error);
+    return null;
+  }
+}
+exports.createComment = createComment;
+
+/**
+ *
+ * @param {string} id - The identifier for the comment to read.
+ * @returns
+ */
+async function readComment(id) {
+  try {
+    const result = await instance.get(`/h/marseycrossing/comment/${id}`);
+    return result.data;
+  } catch (error) {
+    console.error("Unable to read comment.", error);
+    return null;
+  }
+}
+exports.readComment = readComment;
+
+/**
+ *
+ * @param {string} id - The identifier of the comment to edit.
+ * @param {string} body - The new body.
+ * @returns
+ */
+async function updateComment(id, body) {
+  try {
+    const result = await instance.post(`/edit_comment/${id}`, {
+      formkey: "470acae33bdbdb398a03f3b93bae3af1",
+      sub: "marseycrossing",
+      body,
+    });
+    return result.data;
+  } catch (error) {
+    console.error("Unable to edit comment.", error);
+    return null;
+  }
+}
+exports.updateComment = updateComment;
+
+/**
+ *
+ * @param {string} id - Which comment to delete.
+ * @returns
+ */
+async function deleteComment(id) {
+  try {
+    const result = await instance.post(`/delete/comment/${id}`);
+    return result.data;
+  } catch (error) {
+    console.error("Unable to delete comment.", error);
+    return null;
+  }
+}
+exports.deleteComment = deleteComment;
+// #endregion

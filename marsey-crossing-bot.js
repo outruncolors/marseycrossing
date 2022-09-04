@@ -1,6 +1,12 @@
+const { deleteComment } = require("./rdrama-requests");
+
 module.exports = class MarseyCrossingBot {
   async run(command) {
     console.log("Running command: ", command);
+
+    const result = await deleteComment("18");
+
+    console.log(result);
   }
 
   /**
