@@ -50,6 +50,24 @@ module.exports = class MarseyCrossingBot {
   }
 
   /**
+   * End an ongoing congregation and archive the relevant post.
+   */
+  async disperseCongregation() {
+    // If a Marsey group is currently in progress, don't spawn a new group.
+    const activeCongregation = await repository.getActiveCongregation();
+
+    if (!activeCongregation) {
+      throw new Error("There is no active congregation.");
+    }
+
+    // Lock the post.
+
+    await repository.deleteCongregation();
+
+    console.info("Successfully dispersed the active congregation.");
+  }
+
+  /**
    * Process a user's hug and determine if it succeeds or not.
    */
   handleUserHugged() {}

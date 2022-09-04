@@ -4,7 +4,8 @@
   "description": "Kinda like Animal Crossing but with Marsey",
   "main": "index.js",
   "scripts": {
-    "spawn-congregation": "node ./index --command=spawnCongregation"
+    "congregation:spawn": "node ./index --command=spawnCongregation",
+    "congregation:disperse": "node ./index --command=disperseCongregation"
   },
   "author": "",
   "license": "ISC",

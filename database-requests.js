@@ -69,4 +69,11 @@ async function createCongregation(congregation) {
   await writeDatabase(database);
 }
 exports.createCongregation = createCongregation;
+
+async function deleteCongregation() {
+  const database = await readDatabase();
+  database.congregation = null;
+  await writeDatabase(database);
+}
+exports.deleteCongregation = deleteCongregation;
 // #endregion
