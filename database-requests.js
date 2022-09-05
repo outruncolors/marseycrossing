@@ -53,6 +53,7 @@ async function getAvailableMarseys() {
 }
 exports.getAvailableMarseys = getAvailableMarseys;
 
+// #region Congregation
 async function getActiveCongregation() {
   const database = await readDatabase();
   return database.congregation;
@@ -70,10 +71,65 @@ async function createCongregation(congregation) {
 }
 exports.createCongregation = createCongregation;
 
+async function updateCongregation(congregation) {
+  const database = await readDatabase();
+
+  database.congregation = congregation;
+
+  await writeDatabase(database);
+}
+exports.updateCongregation = updateCongregation;
+
 async function deleteCongregation() {
   const database = await readDatabase();
   database.congregation = null;
   await writeDatabase(database);
 }
 exports.deleteCongregation = deleteCongregation;
+// #endregion
+
+// #region Village
+async function createVillage(playerId, postId, ...residents) {
+  const database = await readDatabase();
+
+  database.players[playerId] = {
+    village: {
+      postId,
+      name: "Village",
+      residents,
+    },
+  };
+
+  await writeDatabase(database);
+}
+exports.createVillage = createVillage;
+
+async function readVillage(playerId) {
+  const { players } = await readDatabase();
+  const player = players[playerId];
+  return player ? player.village : null;
+}
+exports.readVillage = readVillage;
+
+async function updateVillage(playerId, updatedVillage) {
+  const village = await readVillage(playerId);
+
+  if (village) {
+    const database = await readDatabase();
+    database.players[playerId].village = updatedVillage;
+    await writeDatabase(database);
+  }
+}
+exports.updateVillage = updateVillage;
+
+async function addVillageResident(playerId, resident) {
+  const village = await readVillage(playerId);
+
+  if (village) {
+    village.residents.push(resident);
+    await updateVillage(playerId, village);
+  }
+}
+exports.addVillageResident = addVillageResident;
+// #endregion
 // #endregion

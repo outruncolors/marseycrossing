@@ -3,6 +3,7 @@
   "players": {
     "14281": {
       "village": {
+        "postId": 2,
         "name": "Primera",
         "residents": [
           "marseyvirus"
